@@ -1,29 +1,28 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  padding: 20px;
+function sendMessage() {
+  const userInput = document.getElementById("user-input").value;
+  if (!userInput) return;
+
+  addMessage(userInput, "user");
+
+  // Basit cevap sistemi
+  let botResponse = "I'm not sure how to respond to that.";
+  if (userInput.toLowerCase().includes("hello")) {
+    botResponse = "Hello! How can I help you today?";
+  } else if (userInput.toLowerCase().includes("how are you")) {
+    botResponse = "I'm just a bot, but I'm doing fine!";
+  } else if (userInput.toLowerCase().includes("bye")) {
+    botResponse = "Goodbye! Have a nice day.";
+  }
+
+  setTimeout(() => {
+    addMessage(botResponse, "bot");
+  }, 500);
+
+  document.getElementById("user-input").value = "";
 }
 
-#chatbox {
-  width: 100%;
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.message {
-  margin: 10px 0;
-}
-
-.user {
-  text-align: right;
-  color: blue;
-}
-
-.bot {
-  text-align: left;
-  color: green;
-}
+function addMessage(message, sender) {
+  const chatbox = document.getElementById("chatbox");
+  const messageElem = document.createElement("div");
+  messageElem.className = `message ${sender}`;
+ 
