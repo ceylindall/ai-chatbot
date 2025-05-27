@@ -1,0 +1,31 @@
+function sendMessage() {
+  const userInput = document.getElementById("user-input").value;
+  if (!userInput) return;
+
+  addMessage(userInput, "user");
+
+  // Basit cevap sistemi
+  let botResponse = "I'm not sure how to respond to that.";
+  if (userInput.toLowerCase().includes("hello")) {
+    botResponse = "Hello! How can I help you today?";
+  } else if (userInput.toLowerCase().includes("how are you")) {
+    botResponse = "I'm just a bot, but I'm doing fine!";
+  } else if (userInput.toLowerCase().includes("bye")) {
+    botResponse = "Goodbye! Have a nice day.";
+  }
+
+  setTimeout(() => {
+    addMessage(botResponse, "bot");
+  }, 500);
+
+  document.getElementById("user-input").value = "";
+}
+
+function addMessage(message, sender) {
+  const chatbox = document.getElementById("chatbox");
+  const messageElem = document.createElement("div");
+  messageElem.className = `message ${sender}`;
+  messageElem.innerText = message;
+  chatbox.appendChild(messageElem);
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
